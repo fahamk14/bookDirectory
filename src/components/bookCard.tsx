@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { Book } from "../api/types";
+import { BookCover } from "./bookCover";
 import { BookInfo } from "./bookInfo";
-import { LazyImage } from "./LazyImage";
 import { BOOK_FORMAT_PREFERENCES, ERROR_MESSAGES } from "../constants";
 
 interface BookCardProps {
@@ -41,10 +41,10 @@ export const BookCard = ({ book }: BookCardProps) => {
       }}
       aria-label={`Open ${book.title} by ${book.authors[0]?.name}`}
     >
-      <LazyImage 
-        src={coverImage || ''} 
+      <BookCover 
+        src={coverImage} 
         alt={`Cover of ${book.title}`}
-        className="book-cover"
+        loading="lazy"
       />
       <BookInfo 
         title={book.title}

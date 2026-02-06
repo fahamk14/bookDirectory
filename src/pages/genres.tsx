@@ -7,12 +7,12 @@ export const Genres = () => {
   const navigate = useNavigate();
 
   return (
-    <Box component="main" className="py-2xl">   
+    <Box component="main" className="genres-page">   
 
-      <Box component="section" className="bg-lavender py-xl" sx={{ display: "flex", justifyContent: "center" }}>
-        <Box sx={{ width: "70%" }}>
+      <Box component="section" className="genres-section">
+        <Box className="genres-content">
 
-          <Box component="header" className="mb-2xl">
+          <Box component="header" sx={{ mb: '48px' }}>
             <Typography component="h1" className="hero-title">
               Gutenberg Project
             </Typography>

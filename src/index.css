@@ -17,11 +17,6 @@ body {
 }
 
 /* Layout Utilities */
-.page-container {
-  min-height: 100vh;
-  background-color: #fff;
-}
-
 .content-wrapper {
   max-width: 1100px;
   margin: 0 auto;
@@ -49,26 +44,37 @@ body {
   background-color: #ffffff;
 }
 
-/* Spacing Utilities */
-.py-sm { padding-top: 16px; padding-bottom: 16px; }
-.py-md { padding-top: 24px; padding-bottom: 24px; }
-.py-lg { padding-top: 32px; padding-bottom: 32px; }
-.py-xl { padding-top: 48px; padding-bottom: 48px; }
-.py-2xl { padding-top: 64px; padding-bottom: 64px; }
-
-.mb-sm { margin-bottom: 8px; }
-.mb-md { margin-bottom: 16px; }
-.mb-lg { margin-bottom: 24px; }
-.mb-xl { margin-bottom: 32px; }
-.mb-2xl { margin-bottom: 48px; }
-
-/* Typography */
-.text-primary { color: #5E56E7; }
-.text-secondary { color: #A0A0A0; }
-.font-semibold { font-weight: 600; }
-.text-uppercase { text-transform: uppercase; }
-
 /* Component Specific Styles */
+.genres-page {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.genres-section {
+  background-color: #F8F7FF;
+  padding-top: 48px;
+  padding-bottom: 48px;
+  display: flex;
+  justify-content: center;
+}
+
+.genres-content {
+  width: 70%;
+  margin-bottom: 48px;
+}
+
+.books-layout-header {
+  background-color: #ffffff;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.books-layout-content {
+  background-color: #F8F7FF;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
 .hero-title {
   font-family: "Montserrat", sans-serif;
   color: #5E56E7;
@@ -119,11 +125,6 @@ body {
   font-weight: 600 !important;
   font-size: 1.25rem !important;
   text-transform: uppercase;
-}
-
-.icon-sm {
-  width: 20px;
-  height: 20px;
 }
 
 .icon-md {

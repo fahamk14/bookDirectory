@@ -27,8 +27,8 @@ export const BooksLayout = ({
 }: BooksLayoutProps) => {
   return (
     <Box component="main" aria-label={`${topic} books page`}>
-      <Box component="header" className="bg-white content-wrapper py-lg">
-        <Box className="page-header">
+      <Box component="header" className="books-layout-header">
+        <Box className="content-wrapper page-header">
           <button
             type="button"
             onClick={onBackClick}
@@ -45,10 +45,12 @@ export const BooksLayout = ({
           </button>
           <h1 className="page-title">{topic}</h1>
         </Box>
-        <SearchBar value={search} onChange={setSearch} />
+        <Box className="content-wrapper">
+          <SearchBar value={search} onChange={setSearch} />
+        </Box>
       </Box>
       
-      <section className="bg-lavender py-lg" aria-label="Books list">
+      <section className="books-layout-content" aria-label="Books list">
         <Box className={useGrid ? "content-wrapper books-grid" : "content-wrapper"}>
           {children}
           

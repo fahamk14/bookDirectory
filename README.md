@@ -1,16 +1,52 @@
-# React + Vite
+# Book Directory
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application for browsing and discovering books from the Project Gutenberg library.
 
-Currently, two official plugins are available:
+## What It Does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Browse books by literary genres and topics
+- Search through thousands of free public domain books
+- View book details with cover images and author information
+- Infinite scrolling for seamless book exploration
+- Responsive design for all devices
 
-## React Compiler
+## Tech Stack & Libraries
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Core Technologies
+- **React 19** - Modern React with latest features
+- **Vite** - Fast build tool and development server
+- **TypeScript** - Type-safe development
 
-## Expanding the ESLint configuration
+### UI & Styling
+- **Material-UI (MUI)** - React component library with modern design
+- **@emotion/styled** - CSS-in-JS styling solution
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Data & State Management
+- **React Query (TanStack Query)** - Server state management and caching
+- **Axios** - HTTP client for API requests
+
+### Routing
+- **React Router DOM** - Client-side routing
+
+### Development Tools
+- **ESLint** - Code linting and quality checks
+
+## API Integration
+
+Fetches book data from the Gutendex API (Project Gutenberg's REST API), providing access to over 60,000 free eBooks.
+
+## Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
