@@ -1,8 +1,14 @@
-import { Card, Typography, Box } from "@mui/material";  
+import { Card, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Next from "../assets/Next.svg";
 
-export const GenreCard = ({ title, icon, onClick }:{title: string, icon: string, onClick: () => void}) => {
+interface GenreCardProps {
+  title: string;
+  icon: string;
+  onClick: () => void;
+}
+
+export const GenreCard = ({ title, icon, onClick }: GenreCardProps) => {
   const navigate = useNavigate();
 
   const handleClick = () => {

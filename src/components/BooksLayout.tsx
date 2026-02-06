@@ -12,7 +12,7 @@ interface BooksLayoutProps {
   children: React.ReactNode;
   showLoader?: boolean;
   loaderRef?: React.RefObject<HTMLDivElement | null>;
-  useGrid?: boolean; // Control whether to use grid layout
+  useGrid?: boolean;
 }
 
 export const BooksLayout = ({ 
@@ -23,28 +23,32 @@ export const BooksLayout = ({
   children, 
   showLoader = false,
   loaderRef,
-  useGrid = true // Default to grid for book cards
+  useGrid = true
 }: BooksLayoutProps) => {
   return (
-    <Box>
-      <Box className="bg-white content-wrapper py-lg">
+    <Box component="main" aria-label={`${topic} books page`}>
+      <Box component="header" className="bg-white content-wrapper py-lg">
         <Box className="page-header">
-          <Box 
-            component="img" 
-            src={Back} 
-            className="icon-md"
+          <button
+            type="button"
             onClick={onBackClick}
-            sx={{ cursor: 'pointer' }}
+            className="icon-md"
             aria-label="Go back to genres"
-          />
-          <Box component="span" className="page-title">
-            {topic}
-          </Box>
+            style={{ 
+              background: 'none', 
+              border: 'none', 
+              cursor: 'pointer',
+              padding: 0
+            }}
+          >
+            <Box component="img" src={Back} alt="Back arrow" />
+          </button>
+          <h1 className="page-title">{topic}</h1>
         </Box>
         <SearchBar value={search} onChange={setSearch} />
       </Box>
       
-      <Box className="bg-lavender py-lg">
+      <section className="bg-lavender py-lg" aria-label="Books list">
         <Box className={useGrid ? "content-wrapper books-grid" : "content-wrapper"}>
           {children}
           
@@ -53,8 +57,14 @@ export const BooksLayout = ({
           ))}
         </Box>
         
-        {loaderRef && <div ref={loaderRef} />}
-      </Box>
+        {loaderRef && (
+          <div 
+            ref={loaderRef} 
+            aria-label="Loading more books"
+            style={{ height: '1px' }}
+          />
+        )}
+      </section>
     </Box>
   );
 };

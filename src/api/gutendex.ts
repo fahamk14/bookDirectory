@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_BASE, IMAGE_MIME_TYPE } from "../constants";
+import { API_BASE, IMAGE_MIME_TYPE } from "./constants";
 import { BooksResponse } from "./types";
 
 export const fetchBooks = async (url: string): Promise<BooksResponse> => {
@@ -7,13 +7,19 @@ export const fetchBooks = async (url: string): Promise<BooksResponse> => {
   return response.data;
 };
 
-export const buildBooksUrl = (topic = "", search = "") => {
-  const params = new URLSearchParams({
-    topic: topic?.toLowerCase() || "",
-    mime_type: IMAGE_MIME_TYPE // Only fetch books with image covers
-  });
-
-  if (search) params.append("search", search);
-
-  return `${API_BASE}?${params.toString()}`;
+export const buildBooksUrl = (topic?: string, search?: string): string => {
+  const params = new URLSearchParams();
+  
+  if (topic) {
+    params.append("topic", topic);
+  }
+  
+  if (search) {
+    params.append("search", search);
+  }
+  
+  params.append("mime_type", IMAGE_MIME_TYPE);
+  
+  const queryString = params.toString();
+  return queryString ? `${API_BASE}?${queryString}` : API_BASE;
 };

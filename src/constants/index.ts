@@ -7,34 +7,16 @@ import Humour from "../assets/Humour.svg";
 import Adventure from "../assets/Adventure.svg";
 import Politics from "../assets/Politics.svg";
 
-// API Constants
-export const API_BASE = "/api/books/";
-export const IMAGE_MIME_TYPE = "image/jpeg";
-
-// Format Preferences for Book Viewing
-export const BOOK_FORMAT_PREFERENCES = [
-  'text/html',
-  'application/pdf', 
-  'text/plain'
-] as const;
-
 // UI Constants
+export const BOOK_FORMAT_PREFERENCES = ['text/html', 'application/pdf', 'text/plain'] as const;
+
 export const BOOK_COVER_HEIGHT = 162;
 export const BOOK_COVER_WIDTH = 114;
 export const DEBOUNCE_DELAY = 500;
 
-// Skeleton Loading Counts
 export const INITIAL_SKELETON_COUNT = 8;
-export const PAGINATION_SKELETON_COUNT = 8;
+export const PAGINATION_SKELETON_COUNT = 4;
 
-// React Query Cache Settings
-export const CACHE_SETTINGS = {
-  STALE_TIME: 5 * 60 * 1000, // 5 minutes
-  CACHE_TIME: 10 * 60 * 1000, // 10 minutes
-  RETRY_COUNT: 3
-} as const;
-
-// Error Messages
 export const ERROR_MESSAGES = {
   NO_VIEWABLE_VERSION: "No viewable version available",
   API_ERROR: "Failed to load books. Please try again.",
@@ -42,13 +24,40 @@ export const ERROR_MESSAGES = {
   NETWORK_ERROR: "Network error. Please check your connection."
 } as const;
 
-// Genre Data
 export const GENRES = [
-  { title: "Fiction", description: "Fictional stories and novels", icon: Fiction },
-  { title: "Philosophy", description: "Philosophical texts and theories", icon: Philosophy },
-  { title: "Drama", description: "Dramatic works and plays", icon: Drama },
-  { title: "History", description: "Historical documents and accounts", icon: History },
-  { title: "Humour", description: "Comedy and humorous works", icon: Humour },
-  { title: "Adventure", description: "Adventure and action stories", icon: Adventure },
-  { title: "Politics", description: "Political texts and documents", icon: Politics }
+  {
+    title: "Fiction",
+    icon: Fiction,
+    description: "Imaginative stories and literary works"
+  },
+  {
+    title: "Philosophy",
+    icon: Philosophy,
+    description: "Philosophical texts and theories"
+  },
+  {
+    title: "Drama",
+    icon: Drama,
+    description: "Theatrical plays and dramatic works"
+  },
+  {
+    title: "History",
+    icon: History,
+    description: "Historical accounts and documents"
+  },
+  {
+    title: "Humour",
+    icon: Humour,
+    description: "Comedy and humorous writings"
+  },
+  {
+    title: "Adventure",
+    icon: Adventure,
+    description: "Adventure stories and explorations"
+  },
+  {
+    title: "Politics",
+    icon: Politics,
+    description: "Political texts and government documents"
+  }
 ] as const;

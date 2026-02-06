@@ -6,9 +6,10 @@ interface BookCoverProps {
   src?: string;
   onError?: () => void;
   alt?: string;
+  loading?: "lazy" | "eager";
 }
 
-export const BookCover = ({ src, onError, alt }: BookCoverProps) => {
+export const BookCover = ({ src, onError, alt, loading = "lazy" }: BookCoverProps) => {
   const [imageError, setImageError] = useState(false);
 
   const handleImageError = () => {
@@ -38,14 +39,14 @@ export const BookCover = ({ src, onError, alt }: BookCoverProps) => {
   }
 
   return (
-    <Box 
-      component="img" 
+    <img 
       src={src} 
       width="100%" 
       height={BOOK_COVER_HEIGHT} 
       className="book-cover"
       onError={handleImageError}
       alt={alt}
+      loading={loading}
     />
   );
 };

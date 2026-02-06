@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchBooks } from "../api/gutendex";
-import { CACHE_SETTINGS } from "../constants";
+import { CACHE_SETTINGS } from "../api/constants";
 import { BooksResponse, Book } from "../api/types";
 
 export const useInfiniteBooks = (initialUrl: string) => {
@@ -13,21 +13,13 @@ export const useInfiniteBooks = (initialUrl: string) => {
     hasNextPage,
     isFetchingNextPage,
     isLoading,
-    isFetching,
     error,
-  } = useInfiniteQuery<BooksResponse>({
-    queryKey: ['books', initialUrl],
-    queryFn: async ({ pageParam }: { pageParam: unknown }) => {
-      const url = pageParam as string;
-      // Transform external URLs to use our proxy
-      const proxiedUrl = url.includes('gutendex.com') 
-        ? url.replace('https://gutendex.com', '/api')
-        : url;
-      return fetchBooks(proxiedUrl);
-    },
-    getNextPageParam: (lastPage) => {
-      // Transform the next URL to use our proxy
+  } = useInfiniteQuery({
+    queryKey: ["books", initialUrl],
+    queryFn: ({ pageParam = initialUrl }) => fetchBooks(pageParam),
+    getNextPageParam: (lastPage: BooksResponse) => {
       if (lastPage.next) {
+        // Transform external API URL to local proxy URL
         return lastPage.next.replace('https://gutendex.com', '/api');
       }
       return lastPage.next;
@@ -42,29 +34,37 @@ export const useInfiniteBooks = (initialUrl: string) => {
     return acc.concat(page.results);
   }, []) || [];
 
-  useEffect(() => {
-    if (!loader.current || !hasNextPage || isFetchingNextPage) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && hasNextPage) {
-          fetchNextPage();
-        }
-      },
-      { threshold: 1.0 }
-    );
-
-    observer.observe(loader.current);
-
-    return () => observer.disconnect();
+  const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
+    const [entry] = entries;
+    if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  return { 
-    books, 
-    loader, 
-    isLoading, // Initial loading state
-    isFetching, // Any fetching state (initial + pagination)
-    isFetchingNextPage, // Pagination loading state
-    error, // API error state
+  useEffect(() => {
+    const currentLoader = loader.current;
+    if (!currentLoader) return;
+
+    const observer = new IntersectionObserver(handleObserver, {
+      threshold: 0.1,
+      rootMargin: '100px',
+    });
+
+    observer.observe(currentLoader);
+
+    return () => {
+      if (currentLoader) {
+        observer.unobserve(currentLoader);
+      }
+    };
+  }, [handleObserver]);
+
+  return {
+    books,
+    loader,
+    isLoading,
+    isFetchingNextPage,
+    error,
+    hasNextPage,
   };
 };
